@@ -26,6 +26,9 @@ public class Goods {
 		return price;
 	}
 	public void setPrice(int price) {
+		if(price < 0) {
+			return; // 0보다 적은 가격이 들어올경우 셋팅을 안하겠다는 뜻
+		}
 		this.price = price;
 	}
 	public int getCountStock() {
