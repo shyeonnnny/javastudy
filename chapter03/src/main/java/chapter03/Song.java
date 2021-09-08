@@ -9,6 +9,22 @@ public class Song {
 	private int year;
 	private String track;
 	
+	public Song(String title, String artist) {
+		// this.title = title;
+		// this.artist = artist;
+		// some code...
+		this(title, artist, null, null, 0, null);
+	}
+	
+	public Song(String title, String artist, String composer, String album, int year, String track) {
+		this.title = title;
+		this.artist = artist;
+		this.composer = composer;
+		this.album = album;
+		this.year = year;
+		this.track = track;
+		System.out.println("some code...");
+	}
 	
 	
 	public String getTitle() {
