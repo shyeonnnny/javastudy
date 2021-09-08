@@ -13,21 +13,18 @@ public class Prob5 {
 				char number_char = number.charAt(j);
 				if(number_char == '3') {
 					clap ++;
-					System.out.print(number + " ");
 				}
-				else if (number_char == '6') {
+				else if(number_char == '6') {
 					clap ++;
-					System.out.print(number + " ");
 				}
-				else if (number_char == '9') {
+				else if(number_char == '9') {
 					clap ++;
-					System.out.print(number + " ");
-				}
-				else {
-					clap = 0;
-				}
-
+				}		
 			}
+			if (clap == 0) {
+				continue;
+			}
+			System.out.print(number + " ");
 			for (int j=0; j<clap; j++) {
 				System.out.print("짝");
 			}

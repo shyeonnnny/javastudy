@@ -1,11 +1,20 @@
 package chapter03;
 
 public class Goods {
+	public static int countOfGoods = 0;
+	// public static final int countOfGoods = 0;
+	// final : 뒤에서 새로 정의하거나 값 대입 불가
+	
 	private String name; /* private : 외부에서 접근 불가 */
 	private int price;
 	private int countStock;
 	private int countSold;
 	
+	public Goods() {
+		Goods.countOfGoods = Goods.countOfGoods + 1;
+		// 같은 클래스이기 때문에 Goods를 생략하여도되지만
+		// 적어주는것이 원칙
+	}
 	
 	public String getName() {
 		return name;
@@ -39,5 +48,8 @@ public class Goods {
 				", countSold:" + countSold);
 	}
 	
+	public int calcDiscountPrice(int percentage) {
+		return price * percentage / 100;
+	}
 	
 }
