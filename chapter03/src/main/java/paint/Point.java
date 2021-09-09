@@ -3,6 +3,15 @@ package paint;
 public class Point implements Drawable {
 	private int x;
 	private int y;
+	
+	public Point() {
+		
+	}
+	
+	public Point(int x, int y) {
+		this.x = x;
+		this.y = y;
+	} // 생성자를 명시했기 때문에 기본생성자를 안만들어줌
 
 	public int getX() {
 		return x;
