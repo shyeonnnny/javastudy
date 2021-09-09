@@ -1,4 +1,13 @@
-package paint;
+package com.douzone.paint.main;
+
+import com.douzone.paint.i.Drawable;
+import com.douzone.paint.point.ColorPoint;
+import com.douzone.paint.point.Point;
+import com.douzone.paint.shape.Circle;
+import com.douzone.paint.shape.Rectangle;
+import com.douzone.paint.shape.Shape;
+import com.douzone.paint.shape.Triangle;
+import com.douzone.paint.text.GraphicText;
 
 public class Main {
 	public static void main(String[] args) {
@@ -40,6 +49,20 @@ public class Main {
 		
 		GraphicText text = new GraphicText("Hello World");
 		draw(text);
+		
+		// instanceof test
+		System.out.println(circle instanceof Object);
+		System.out.println(circle instanceof Shape);
+		System.out.println(circle instanceof Circle);
+		// System.out.println(circle instanceof Rectangle); 
+		// --> 오류 : class는 higherachy 상위와 하위만 instanceof 연산자를 사용할 수 있음
+		
+		// interface는 higherachy와 상관없이 instanceof 연산자를 사용할 수 있음
+		System.out.println(circle instanceof Drawable);
+		System.out.println(circle instanceof Runnable);
+		
+		
+		
 	}
 	
 	public static void draw(Drawable drawable) {
@@ -69,4 +92,5 @@ public class Main {
 //	public static void drawCircle(Circle circle) {
 //		circle.draw();
 //	}
+	
 }

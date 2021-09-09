@@ -1,4 +1,4 @@
-package paint;
+package com.douzone.paint.point;
 
 public class ColorPoint extends Point {
 	private String color; // 캡슐화때문에 private
@@ -9,6 +9,7 @@ public class ColorPoint extends Point {
 		super(x,y);
 		//setX(x);
 		//setY(y);
+		
 		this.color = color;
 	}
 
