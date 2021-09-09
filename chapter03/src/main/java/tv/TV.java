@@ -16,7 +16,13 @@ public class TV {
 	}
 	
 	public void channel(boolean up) {
-		channel(channel + (up ? 1 : -1));
+		// channel(channel + (up ? 1 : -1));
+		// 위 코드와 아래 코드는 동일한 기능을 함
+		if(up) {
+			channel(channel + 1);
+		}else {
+			channel(channel - 1);
+		}
 	}
 
 	public void channel(int channel) {
