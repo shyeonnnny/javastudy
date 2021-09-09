@@ -20,17 +20,26 @@ public class Main {
 		point2.show(true);
 		
 		Triangle triangle = new Triangle();
-		triangle.draw();
-		drawShape(triangle);
+		//triangle.draw();
+		// drawTriangle(triangle)
+		// drawShape(triangle);
+		draw(triangle);
 		
 		Rectangle rectangle = new Rectangle();
-		rectangle.draw();
-		drawShape(rectangle);
+//		rectangle.draw();
+//		drawRectangle(rectangle);
+//		drawShape(rectangle);
+		draw(rectangle);
 		
 		Circle circle = new Circle();
-		circle.draw();
-		drawShape(circle);
-		
+//		circle.draw();
+//		drawCircle(circle);
+//		drawShape(circle);
+		draw(circle);
+	}
+	
+	public static void draw(Drawable drawable) {
+		drawable.draw();
 	}
 	
 	public static void drawPoint(Point point) {
