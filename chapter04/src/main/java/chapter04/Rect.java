@@ -13,7 +13,7 @@ public class Rect {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(height, width);
+		return Objects.hash(height * width);
 	}
 
 
@@ -26,7 +26,7 @@ public class Rect {
 		if (getClass() != obj.getClass())
 			return false;
 		Rect other = (Rect) obj;
-		return height == other.height && width == other.width;
+		return height * width == other.height * other.width;
 	}
 
 
