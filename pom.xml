@@ -33,5 +33,6 @@
     	<module>test</module>
     	<module>project3</module>
     	<module>chapter04</module>
+    	<module>finaltest</module>
     </modules>
 </project>
