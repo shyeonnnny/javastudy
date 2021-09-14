@@ -17,5 +17,9 @@ public class Printer {
 	public void println(String i) {
 		System.out.println(i);
 	}
+	
+//	public <T> void pringln(T t) {
+//		System.out.println(t);
+//	}
 
 }
