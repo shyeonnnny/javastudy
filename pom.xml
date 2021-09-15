@@ -36,5 +36,6 @@
     	<module>finaltest</module>
     	<module>project04</module>
     	<module>project05</module>
+    	<module>network</module>
     </modules>
 </project>
