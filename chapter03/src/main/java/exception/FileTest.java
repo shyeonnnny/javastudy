@@ -11,7 +11,7 @@ public class FileTest {
 		try {
 			fis = new FileInputStream("hello.txt");
 			int data = fis.read();
-			System.out.println((char)data);
+			System.out.println(data);
 		} catch (FileNotFoundException e) {
 			System.out.println("error : " + e);
 		} catch (IOException e) {
