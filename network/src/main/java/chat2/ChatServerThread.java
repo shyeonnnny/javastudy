@@ -9,8 +9,6 @@ import java.io.Writer;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.List;
-
-import chat.ChatServer;
 import echo.EchoServer;
 
 public class ChatServerThread extends Thread {
@@ -19,9 +17,9 @@ public class ChatServerThread extends Thread {
 	private Socket socket;
 	private BufferedReader bufferedreader = null;
 	private PrintWriter printWriter = null;
-	List<Writer> listWriters;
+	List<PrintWriter> listWriters = null;
 
-	public ChatServerThread(Socket socket, List<Writer> listWriters) {
+	public ChatServerThread(Socket socket, List<PrintWriter> listWriters) {
 		this.socket = socket;
 		this.listWriters = listWriters;
 	}
@@ -29,10 +27,10 @@ public class ChatServerThread extends Thread {
 	public void run() {
 		
 		// 서버입장에서 클라이언트의 정보를 보여주는 구분 ( 필수적은 x )
-		InetSocketAddress inetRemoteSocketAddress = (InetSocketAddress)socket.getRemoteSocketAddress();
-		String remoteHostAddress = inetRemoteSocketAddress.getAddress().getHostAddress();
-		int remoteHostPort = inetRemoteSocketAddress.getPort();
-		EchoServer.log("connected by client[" + remoteHostAddress + ":" + remoteHostPort + "]");
+//		InetSocketAddress inetRemoteSocketAddress = (InetSocketAddress)socket.getRemoteSocketAddress();
+//		String remoteHostAddress = inetRemoteSocketAddress.getAddress().getHostAddress();
+//		int remoteHostPort = inetRemoteSocketAddress.getPort();
+//		EchoServer.log("connected by client[" + remoteHostAddress + ":" + remoteHostPort + "]");
 		
 		try {
 			bufferedreader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
@@ -41,20 +39,28 @@ public class ChatServerThread extends Thread {
 			while ( true ) {
 				String request = bufferedreader.readLine();
 				if(request == null) {
-					log("클라이언트로부터 연결 끊임");
 					doQuit(printWriter);
 					break;
 				}
 				
+				//System.out.println("===========" + request + "===========");
+				
 				String[] tokens = request.split(":");
 				if("join".equals(tokens[0])) {
 					doJoin(tokens[1], printWriter);
-				} else if ("message".equals(tokens[0])) {
+				} 
+				else if ("message".equals(tokens[0])) {
+					if(tokens.length < 2) {
+						continue;
+					}
+
 					doMessage(tokens[1]);
-				} else if ("quit".equals(tokens[0])) {
+				}
+				else if ("quit".equals(tokens[0])) {
 					doQuit(printWriter);
-				} else {
-					ChatServer.log("에러:알수 없는 요청 (" + tokens[0] + ")");
+				} 
+				else {
+					log("에러:알수 없는 요청 (" + tokens[0] + ")");
 				}
 			}
 			
@@ -70,54 +76,56 @@ public class ChatServerThread extends Thread {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
 	}
 	
 	private void doQuit(Writer writer) {
 		removeWriter (writer);
-		
 		String data = nickname + "님이 퇴장 하였습니다.";
 		broadcast (data);
+		
+		log(nickname + "으로부터 연결 끊임");
 	}
 	
 	private void removeWriter (Writer writer) {
-		// 잘 구현해보기
+		//잘 구현해보기
+		synchronized (listWriters) {
+			listWriters.remove(writer);
+		}
 	}
 	private void doMessage(String string) {
 		// 잘 구현해보기
+		broadcast(this.nickname + ":" + string);
 	}
-	private void doJoin(String nickName, Writer writer) {
+	
+	private void doJoin(String nickName, PrintWriter writer) {
 		this.nickname = nickName;
 		
 		String data = nickName + "님이 참여하였습니다.";
 		broadcast(data);
 		
 		addWriter(writer);
-		
-		printWriter.println("join:ok");
+		log(nickname + "님이 참여하였습니다.");
+		System.out.println(nickname + "님이 참여하였습니다.");
 		printWriter.flush();
 		
 	}
 	
-	private void addWriter(Writer writer) {
+	private void addWriter(PrintWriter writer) {
 		synchronized (listWriters) {
 			listWriters.add(writer);
 		}
 	}
 	
-	private void log(String string) {
+	static void log(String string) {
 		System.out.println("[HttpServer#" + Thread.currentThread().getId() + "]" + string);
 		
 	}
 	
 	private void broadcast (String data) {
 		synchronized (listWriters) {
-			for (Writer writer : listWriters) {
-				PrintWriter printWriter = (PrintWriter)writer;
-				printWriter.println (data);
-				printWriter.flush();
+			for (PrintWriter writer : listWriters) {
+				writer.println (data);
+				writer.flush();
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 package chat2;
 
 import java.io.IOException;
-import java.io.Writer;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatServer {
-	private static final int PORT = 8010;
-	static List<Writer> listWriters = new ArrayList<Writer>();
+	public static final int PORT = 8030;
+	private static List<PrintWriter> listWriters = new ArrayList<PrintWriter>();
 
 	public static void main(String[] args) {
+		
 		ServerSocket serverSocket = null;
 		
 		try {
