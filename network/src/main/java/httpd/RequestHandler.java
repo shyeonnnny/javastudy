@@ -59,14 +59,15 @@ public class RequestHandler extends Thread {
 				consoleLog("request : " + tokens[1]);
 				reponseStaticResource(outputStream, tokens[1], tokens[2]);
 			} else {
+				System.out.println(tokens[0]);
 				// methods : POST, PUT, DELETE, HEAD, CONNECT
 				// SimpleHttpServer에서는 무시 (400 Bad Request 처리)
-				response400Error(outputStream, tokens[1], tokens[2]);
+				//response400Error(outputStream, tokens[1], tokens[2]);
 			}
 
 			// 예제 응답입니다.
 			// 서버 시작과 테스트를 마친 후, 주석 처리 합니다.
-			// outputStream.write( "HTTP/1.1 200 OK\n".getBytes( "UTF-8" ) );
+			// response400Error( "HTTP/1.1 400 Bad Request\n".getBytes( "UTF-8" ) );
 			// outputStream.write( "Content-Type:text/html; charset=utf-8\n".getBytes( "UTF-8" ) );
 			// outputStream.write( "\r\n".getBytes() );
 			// outputStream.write( "<h1>이 페이지가 잘 보이면 실습과제 SimpleHttpServer를 시작할 준비가 된 것입니다.</h1>".getBytes( "UTF-8" ) );
@@ -87,9 +88,14 @@ public class RequestHandler extends Thread {
 	}
 
 
-	private void response400Error(OutputStream outputStream, String string, String string2) {
-		
-	}
+//	private void response400Error(OutputStream outputStream, String string, String string2) {
+//		
+//		// response400Error( "HTTP/1.1 400 Bad Request\n".getBytes( "UTF-8" ) );
+//		// outputStream.write( "Content-Type:text/html; charset=utf-8\n".getBytes( "UTF-8" ) );
+//		// outputStream.write( "\r\n".getBytes() );
+//		// outputStream.write( "<h1>이 페이지가 잘 보이면 실습과제 SimpleHttpServer를 시작할 준비가 된 것입니다.</h1>".getBytes( "UTF-8" ) );
+//		
+//	}
 
 	// welcome file set 
 	private void reponseStaticResource(OutputStream outputStream, String url, String protocol) throws IOException {
@@ -99,7 +105,7 @@ public class RequestHandler extends Thread {
 
 		File file = new File(DOCUMENT_ROOT + url);
 		if(!file.exists()) {
-			response404Error(outputStream, url, protocol);
+			//response404Error(outputStream, url, protocol);
 			return;
 		}
 
@@ -113,9 +119,18 @@ public class RequestHandler extends Thread {
 		outputStream.write(body);
 	}
 
-	private void response404Error(OutputStream outputStream, String url, String protocol) {
-		
-	}
+//	private void response404Error(OutputStream outputStream, String url, String protocol) throws IOException {
+//		
+//		byte[] body = Files.readAllBytes(file.toPath());
+//		String contentType = Files.probeContentType(file.toPath());
+//		
+//		
+//		outputStream.write( "HTTP/1.1 404 Not Found\n".getBytes( "UTF-8" ) );
+//		outputStream.write( "Content-Type:text/html; charset=utf-8\n".getBytes( "UTF-8" ) );
+//		outputStream.write( "\r\n".getBytes() );
+//		outputStream.write( "<h1>이 페이지가 잘 보이면 실습과제 SimpleHttpServer를 시작할 준비가 된 것입니다.</h1>".getBytes( "UTF-8" ) );
+//		
+//	}
 
 	public void consoleLog( String message ) {
 		System.out.println( "[RequestHandler#" + getId() + "] " + message );
