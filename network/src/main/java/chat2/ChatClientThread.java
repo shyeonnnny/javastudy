@@ -15,8 +15,8 @@ public class ChatClientThread extends Thread {
 		try {
 			bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
 			while(true) {
-				String msg = bufferedReader.readLine();
-				System.out.println("<< " + msg);
+				String message = bufferedReader.readLine();
+				System.out.println("<< " + message);
 			}
 		} catch (IOException e) {
 			

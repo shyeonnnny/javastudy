@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ChatClient {
@@ -57,7 +58,7 @@ public class ChatClient {
 
 			// 7. 키보드 입력 처리
 			while (true) {
-				System.out.println(">> ");
+				System.out.print(">> ");
 				String input = scanner.nextLine();
 
 				if (input == null) {
