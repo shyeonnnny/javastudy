@@ -14,18 +14,18 @@ public class ChatClientThread extends Thread {
 	public void run() {
 		try {
 			bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
-			while(true) {
+			while (true) {
 				String message = bufferedReader.readLine();
 				System.out.println("<< " + message);
 			}
 		} catch (IOException e) {
-			
+
 		}
-		
+
 	}
 
 	public ChatClientThread(Socket socket) {
-		this.socket  = socket;
+		this.socket = socket;
 	}
 
 }

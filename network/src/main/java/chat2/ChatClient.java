@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class ChatClient {
 	private static final int SERVER_PORT = ChatServer.PORT;
-	private static final String SERVER_IP = "127.0.0.1";
+	private static final String SERVER_IP = "192.168.56.1";
 
 	public static void main(String[] args) {
 		Socket socket = null;
@@ -36,15 +36,15 @@ public class ChatClient {
 			pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
 
 			// 5. join 프로토콜
-			//			System.out.println(">> 닉네임을 입력하세요");
-			//			String nickname = scanner.nextLine();
-			//			pw.println("join:" + nickname);
-			//			pw.flush();
+			// System.out.println(">> 닉네임을 입력하세요");
+			// String nickname = scanner.nextLine();
+			// pw.println("join:" + nickname);
+			// pw.flush();
 
 			String nickname = "";
 
 			while (true) {
-				System.out.print(">> 닉네임을 입력하세요");
+				System.out.print(">> 닉네임을 입력하세요 : ");
 				nickname = scanner.nextLine();
 				if ("".equals(nickname) == false) {
 					break;
@@ -92,6 +92,5 @@ public class ChatClient {
 		}
 
 	}
-
 
 }

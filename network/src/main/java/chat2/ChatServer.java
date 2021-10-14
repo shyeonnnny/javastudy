@@ -10,27 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatServer {
-	public static final int PORT = 8030;
+	public static final int PORT = 8020;
 	private static List<PrintWriter> listWriters = new ArrayList<PrintWriter>();
 
 	public static void main(String[] args) {
-		
+
 		ServerSocket serverSocket = null;
-		
+
 		try {
 			serverSocket = new ServerSocket();
-			
+
 			String hostAddress = InetAddress.getLocalHost().getHostAddress();
 			serverSocket.bind(new InetSocketAddress(hostAddress, PORT));
 			log("연결 기다림 : " + hostAddress + " : " + PORT);
-			
-			while(true) {
+
+			while (true) {
 				Socket socket = serverSocket.accept();
 				new ChatServerThread(socket, listWriters).start();
 			}
-		
-			
-		} catch (IOException e){
+
+		} catch (IOException e) {
 			log("error:" + e);
 		} finally {
 			// 5. 자원정리
@@ -45,11 +44,7 @@ public class ChatServer {
 	}
 
 	private static void log(String string) {
-		System.out.println("[HttpServer#" + Thread.currentThread().getId() + "]" + string);
+		System.out.println("[ChatServer] " + string);
 	}
-	
-	
-	
-	
 
 }
